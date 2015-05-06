@@ -1,8 +1,6 @@
 answer = rand (1..100)
-puts answer
-puts "I have chosen a number between 1 and 100.  What is it?"
-past_guesses = [answer+200]
-guess = true
+puts "I have chosen a number between 1 and 100.  Care to take a guess?"
+past_guesses = [answer+100]
 counter = 0
 
 
@@ -12,7 +10,7 @@ def check_past (guess,answer,past_guesses)
   if guess_diff > past_diff
     puts "Colder :( You were doing so well!"
     return true
-  elsif guess_diff == past_diff
+  elsif guess == past_guesses.last
     puts "Come on, you just guessed that"
     return true
   end
@@ -41,16 +39,22 @@ def up_or_down (guess,answer)
   end
 end
 
-(1..5).each do
+(1..5).each do |num|
   guess = gets.chomp.to_i
-  result = check_past(guess,answer,past_guesses)
-  past_guesses << guess
+  if answer == guess
+    puts "You are correct.  Well played my friend!"
+    break
+    break
+  else
+    result = check_past(guess,answer,past_guesses)
+    past_guesses << guess
+  end
   if !result
     up_or_down(guess,answer)
-  elsif answer == guess
-    puts "You are correct.  Well played good sir!"
-    break
-    break
+  end
+  guesses_left = 5-num
+  puts "#{guesses_left} guesses left"
+  if num == 5
+    puts "...and you're out of tries.  I win :).  Answer:#{answer}"
   end
 end
-puts "Sorry, out of tries.  I win :)"
