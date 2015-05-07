@@ -50,22 +50,22 @@ total_hand = cards["users_hand"]["first_card"] + cards["users_hand"]["second_car
 answer = hand.select { |hand| hand === total_hand }.values.first
 puts answer
 
-# soft = {
-#   2 => {13..16 => "Hit", 17 => "Double or Hit", 18..21 => "Stand"},
-#   3 => {13..16 => "Hit", 17 => "Double or Hit", 18 => "Double or Stand" 19..21 => "Stand"},
-#   4..5 => {13..17 => "Double or Hit", 18 => "Double or Stand" 19..21 => "Stand"},
-#   6 => {13..17 => "Double or Hit", 18..19 => "Double or Stand" 20..21 => "Stand"},
-#   7..8 => {13..17 => "Hit", 18..21 => "Stand"},
-#   9..10 => {13..19 => "Hit", 20..21 => "Stand"},
-#   "A" => {13..17 => "Hit", 18..21 => "Stand"},
-# }
-#
-# pair = {
-#   2..3 => {2..3 => "Split", 4 => "Hit", 18..21 => "Stand"},
-#   4..6 => {13..16 => "Hit", 17 => "Double or Hit", 18 => "Double or Stand" 19..21 => "Stand"},
-#   7 => {13..17 => "Double or Hit", 18 => "Double or Stand" 19..21 => "Stand"},
-#   8 => {13..17 => "Double or Hit", 18..19 => "Double or Stand" 20..21 => "Stand"},
-#   9 => {13..17 => "Hit", 18..21 => "Stand"},
-#   10 => {13..19 => "Hit", 20..21 => "Stand"},
-#   "A" => {13..17 => "Hit", 18..21 => "Stand"},
-# }
+soft = {
+  2 => {13..16 => "Hit", 17 => "Double or Hit", 18..21 => "Stand"},
+  3 => {13..16 => "Hit", 17 => "Double or Hit", 18 => "Double or Stand" 19..21 => "Stand"},
+  4..5 => {13..17 => "Double or Hit", 18 => "Double or Stand" 19..21 => "Stand"},
+  6 => {13..17 => "Double or Hit", 18..19 => "Double or Stand" 20..21 => "Stand"},
+  7..8 => {13..17 => "Hit", 18..21 => "Stand"},
+  9..10 => {13..19 => "Hit", 20..21 => "Stand"},
+  "A" => {13..17 => "Hit", 18..21 => "Stand"},
+}
+
+pair = {
+  2..3 => {2..3 => "Split", 4 => "Hit", 5 => "Double or Hit", 6..9 => "Split",10 => "Stand","A" => "Split"},
+  4..6 => {2..4 => "Split", 5 => "Double or Hit", 6..9 => "Split",10 => "Stand","A" => "Split"},
+  7 => {2..3 => "Split", 4 => "Hit", 5 => "Double or Hit", 6..9 => "Split",10 => "Stand","A" => "Split"},
+  8 => {2 => "Hit", 3 => "Split", 4 => "Hit", 5 => "Double or Hit", 6 => "Hit", 7..9 => "Split",10 => "Stand","A" => "Split"},
+  9 => {2..4 =>"Hit", 5 => "Double or Hit", 6..7 => "Hit",8..9 => "Split",10 => "Stand","A" => "Split"},
+  10 => {2..6 =>"Hit", 7 => "Split",8 => "Pair",9..10 => "Stand","A" => "Split"},
+  "A" => {2..7 =>"Hit",8 => "Pair",9..10 => "Stand","A" => "Split"},
+}
