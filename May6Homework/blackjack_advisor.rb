@@ -35,6 +35,20 @@ def find_hand_type (first, second)
   end
 end
 
+def make_suggestion (hand_type,dealer, first, second)
+puts cards["dealers_card"]
+hand = hand_type.select { |dealer| dealer === cards["dealers_card"] }.values.first
+puts hand
+if type == "soft" && first.include?("A")
+  first = 11
+if type == "soft" && second.include?("A")
+  second = 11
+end
+total_hand = cards["users_hand"]["first_card"] + cards["users_hand"]["second_card"]
+answer = hand.select { |hand| hand === total_hand }.values.first
+puts answer
+end
+
 hard = {
   2..3 => {5..8 => "Hit", 9..11 => "Double or Hit", 12 => "Hit", 13..21 => "Stand"},
   4 => {5..8 => "Hit", 9..11 => "Double or Hit", 12..21 => "Stand"},
@@ -43,12 +57,7 @@ hard = {
   10 => {5..10 => "Hit", 11 => "Double or Hit", 12..16 => "Hit", 17..21 => "Stand"},
   "A" => {5..10 => "Hit", 11 => "Double or Hit", 12..16 => "Hit", 17..21 => "Stand"}
 }
-puts cards["dealers_card"]
-hand = hard.select { |dealer| dealer === cards["dealers_card"] }.values.first
-puts hand
-total_hand = cards["users_hand"]["first_card"] + cards["users_hand"]["second_card"]
-answer = hand.select { |hand| hand === total_hand }.values.first
-puts answer
+
 
 soft = {
   2 => {13..16 => "Hit", 17 => "Double or Hit", 18..21 => "Stand"},
@@ -69,3 +78,5 @@ pair = {
   10 => {2..6 =>"Hit", 7 => "Split",8 => "Pair",9..10 => "Stand","A" => "Split"},
   "A" => {2..7 =>"Hit",8 => "Pair",9..10 => "Stand","A" => "Split"},
 }
+suggestion = make_suggestions(find_hand_type(card["user_hand"]["first_card"],card["user_hand"]["second_card"]),(card["user_hand"]["first_card"],card["user_hand"]["second_card"]))
+puts suggestion
